@@ -47,52 +47,54 @@ class Game {
     setKeyBindings() {
         document.addEventListener('keydown', e => {
             if (this.allowedKeys.includes(e.key)) {
-                console.log(`key press: ${e.key}`);
                 e.preventDefault();
                 if (e.key === 'w') {
-                    this.player1.direction = 'top';
-                    this.player1.speed = 10;
-                }
-                if (e.key === 's') {
-                    this.player1.direction = 'down';
-                    this.player1.speed = 10;
-                }
-                if (e.key === 'a') {
-                    this.player1.direction = 'left';
-                    this.player1.speed = 10;
+                    this.player1.acelerate();
                 }
                 if (e.key === 'd') {
-                    this.player1.direction = 'right';
-                    this.player1.speed = 10;
+                    this.player1.turningRight = true;
+                    console.log(`start turning right`);
+                }
+                if (e.key === 'a') {
+                    this.player1.turningLeft = true;
+                    console.log(`start turning left`);
                 }
                 if (e.key === 'ArrowUp') {
-                    this.player2.direction = 'top';
-                    this.player2.speed = 10;
-                }
-                if (e.key === 'ArrowDown') {
-                    this.player2.direction = 'down';
-                    this.player2.speed = 10;
-                }
-                if (e.key === 'ArrowLeft') {
-                    this.player2.direction = 'left';
-                    this.player2.speed = 10;
+                    this.player2.acelerate();
                 }
                 if (e.key === 'ArrowRight') {
-                    this.player2.direction = 'right';
-                    this.player2.speed = 10;
+                    this.player2.turningRight = true;
+                }
+                if (e.key === 'ArrowLeft') {
+                    this.player2.turningLeft = true;
                 }
             }
         }, false);
 
         document.addEventListener('keyup', e => {
             if (this.allowedKeys.includes(e.key)) {
-                console.log(`key up: ${e.key}`);
                 e.preventDefault();
-                if ('awsd'.split('').includes(e.key)) {
-                    this.player1.speed = 0;
+                if (e.key === 'w') {
+                    this.player1.decelerate();
                 }
-                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                    this.player2.speed = 0;
+                if (e.key === 'd') {
+                    this.player1.turningRight = false;
+                    console.log(`stop turning right`);
+                }
+                if (e.key === 'a') {
+                    this.player1.turningLeft = false;
+                    console.log(`stop turning left`);
+                }
+                if (e.key === 'ArrowUp') {
+                    this.player2.decelerate();
+                }
+                if (e.key === 'ArrowRight') {
+                    this.player2.turningRight = false;
+                    console.log(`stop turning right`);
+                }
+                if (e.key === 'ArrowLeft') {
+                    this.player2.turningLeft = false;
+                    console.log(`stop turning left`);
                 }
             }
         }, false);
